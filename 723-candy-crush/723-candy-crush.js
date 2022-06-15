@@ -37,6 +37,7 @@ var candyCrush = function(board) {
             }
         }
     }
+
     // 3. What Goes Up...
     if (!stable) {
         for (let c = 0; c < width; c++) {
