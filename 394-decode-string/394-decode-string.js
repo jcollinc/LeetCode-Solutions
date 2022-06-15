@@ -8,9 +8,13 @@
     // ] = stop storing, repeat the values until you reach open bracket
 
 function decodeString(s) {
-    let k = ''
+    // amount to multiply by
+    let k = '' 
+    // array to hold k once fully formed
     let multiplyBy = []
+    // array to hold values which need to be repeated
     let toRepeat = []
+    // string to keep track of solution as it is built 
     let res = ''
     
     for (let char of s) {
