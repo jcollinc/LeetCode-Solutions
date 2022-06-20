@@ -28,7 +28,7 @@ Leaderboard.prototype.top = function(K) {
  * @return {void}
  */
 Leaderboard.prototype.reset = function(playerId) {
-    this.scores[playerId] = 0
+    delete this.scores[playerId]
 };
 
 /** 
