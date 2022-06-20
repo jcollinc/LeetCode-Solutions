@@ -13,8 +13,9 @@
  * @return {Node}
  */
 var flatten = function(head) {
+    if (!head) return head
+    let curr = head
     let stack = []
-    let curr = head;
     while (curr) {
         if (curr.child) {
             if (curr.next) {
@@ -24,15 +25,11 @@ var flatten = function(head) {
             curr.next = curr.child
             curr.child.prev = curr
             curr.child = null
-        }
-        else if (!curr.next && stack.length != 0) {
+        } else if (!curr.next && stack.length !== 0) {
             curr.next = stack.pop()
             curr.next.prev = curr
         }
         curr = curr.next
     }
-
-    return head  
+    return head
 };
-
-
