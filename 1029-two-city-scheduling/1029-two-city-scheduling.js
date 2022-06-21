@@ -19,7 +19,9 @@ var twoCitySchedCost = function(costs) {
     }
     
     for (let i = 0; i < costs.length; i++) {
-        res.push(costs[i][1])  
+        if (costs[i][1] !== 0) {
+            res.push(costs[i][1])
+        }
     }
     console.log(ARelCosts)
     return res.reduce((a, b) => a + b)
