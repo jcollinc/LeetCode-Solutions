@@ -9,7 +9,10 @@ var Leaderboard = function() {
  * @return {void}
  */
 Leaderboard.prototype.addScore = function(playerId, score) {
-    this.scores[playerId] = this.scores[playerId] ? this.scores[playerId] + score : score
+    if (this.scores[playerId]) {
+        this.scores[playerId] = this.scores[playerId] + score
+    }
+    else {this.scores[playerId] = score}
 };
 
 /** 
@@ -17,10 +20,10 @@ Leaderboard.prototype.addScore = function(playerId, score) {
  * @return {number}
  */
 Leaderboard.prototype.top = function(K) {
-    let topScores = Object.values(this.scores).sort((a, b) => b - a)
-    topScores.length = K
-    return topScores.reduce((a, b) => a + b)
-    
+    let scoresArr = Object.values(this.scores)
+    scoresArr.sort((a, b) => b - a)
+    scoresArr.length = K
+    return scoresArr.reduce((a, b) => a + b)
 };
 
 /** 
