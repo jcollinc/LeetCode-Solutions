@@ -9,10 +9,7 @@ var Leaderboard = function() {
  * @return {void}
  */
 Leaderboard.prototype.addScore = function(playerId, score) {
-    if (this.scores[playerId]) {
-        this.scores[playerId] = this.scores[playerId] + score
-    }
-    else {this.scores[playerId] = score}
+    this.scores[playerId] ? this.scores[playerId] = this.scores[playerId] + score : this.scores[playerId] = score
 };
 
 /** 
