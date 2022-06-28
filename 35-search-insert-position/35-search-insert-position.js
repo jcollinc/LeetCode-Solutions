@@ -9,8 +9,6 @@ var searchInsert = function(nums, target) {
     while (left <= right) {
         let mid = Math.floor((left + right) / 2)
         if (nums[mid] === target) return mid
-        if (nums[left] === target) return left
-        if (nums[right] === target) return right
         else if (nums[mid] > target) right--
         else left++
     }
