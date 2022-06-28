@@ -3,10 +3,7 @@
  * @return {number}
  */
 var lengthOfLastWord = function(s) {
-    let sArr = s.split(" ")
-    let last = ""
-    for (val of sArr) {
-        if (val.length > 0) last = val
-    }
-    return last.length
+    s = s.replace(/\s+/g, ' ').trim()
+    s = s.split(" ")
+    return s[s.length - 1].length
 };
