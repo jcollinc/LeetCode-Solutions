@@ -10,19 +10,21 @@ var minDeletions = function(s) {
         if (counts[char]) counts[char]++
         else counts[char] = 1
     }
-    let freq = Object.values(counts)
-    freq.sort((a, b) => b - a)
-    let max = freq[0]
-    for (let i = 1; i < freq.length; i++) {
-        if (max === 0) {
-            res += freq[i]
-            freq[i] = 0
+    let countsArr = Object.values(counts)
+    let unique = []
+    while (countsArr.length ? countsArr.reduce((a, b) => a + b) > 0 : countsArr.length) {
+        for (let i = countsArr.length - 1; i >= 0; i--) {
+            if (!countsArr.reduce((a, b) => a + b) > 0) break
+            if(countsArr[i] === 0) continue
+            else if (unique.includes(countsArr[i])) {
+                countsArr[i]--
+                res++
+            }
+            else {
+                unique.push(countsArr[i])
+                countsArr.splice(i, 1)
+            }
         }
-        else if (freq[i] >= max) {
-            res += freq[i] - max + 1
-            freq[i] = max - 1
-        }
-        max = freq[i]
     }
     return res
 };
