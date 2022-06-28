@@ -4,11 +4,15 @@
  * @return {number}
  */
 var searchInsert = function(nums, target) {
-    if (nums.indexOf(target) !== -1) return nums.indexOf(target)
-    else {
-        for (let i = 0; i < nums.length; i++) {
-            if (nums[i] > target) return i
-        }
-    return nums.length
+    let left = 0
+    let right = nums.length - 1
+    while (left <= right) {
+        let mid = Math.floor((left + right) / 2)
+        if (nums[mid] === target) return mid
+        if (nums[left] === target) return left
+        if (nums[right] === target) return right
+        else if (nums[mid] > target) right--
+        else left++
     }
+    return left
 };
