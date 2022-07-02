@@ -14,11 +14,11 @@ var maxArea = function(h, w, horizontalCuts, verticalCuts) {
     let maxW = Math.max(verticalCuts[0], (w - verticalCuts[verticalCuts.length - 1]))
     
     for (i = 1; i < horizontalCuts.length; i++) {
-        if (Math.abs(horizontalCuts[i] - horizontalCuts[i-1]) > maxH) maxH = Math.abs(horizontalCuts[i] - horizontalCuts[i-1])
+        if (horizontalCuts[i] - horizontalCuts[i-1] > maxH) maxH = horizontalCuts[i] - horizontalCuts[i-1]
     }
     
     for (i = 1; i < verticalCuts.length; i++) {
-        if (Math.abs(verticalCuts[i] - verticalCuts[i-1]) > maxW) maxW = Math.abs(verticalCuts[i] - verticalCuts[i-1])
+        if (verticalCuts[i] - verticalCuts[i-1] > maxW) maxW = verticalCuts[i] - verticalCuts[i-1]
     }
     
     return (BigInt(maxH) * BigInt(maxW)) % 1000000007n
