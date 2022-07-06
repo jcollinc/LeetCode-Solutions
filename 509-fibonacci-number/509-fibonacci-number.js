@@ -9,7 +9,6 @@ var fib = function(n) {
     
     for (let i = 2; fib.length <= n; i++) {
         fib.push(fib[i - 1] + fib[i - 2])        
-    }
-    
+    }   
     return fib.pop()
 };
