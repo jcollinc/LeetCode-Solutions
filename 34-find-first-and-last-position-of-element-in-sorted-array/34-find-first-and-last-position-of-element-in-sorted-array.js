@@ -3,18 +3,16 @@
  * @param {number} target
  * @return {number[]}
  */
-var searchRange = function(nums, target) {
-    let res = [Infinity, Infinity]
-    for (let i = 0; i < nums.length; i++) {
-        if (nums[i] === target && nums[i-1] !== target) {
-            res[0] = i
-            while (nums[i] === target) {
-                i++
-            }
-            res[1] = i - 1
-            break
-        }   
-    }
-    if (res[0] === Infinity) return [-1, -1]
-    else return res
+var searchRange = function(N, T) {
+    const find = (target, arr, left=0, right=arr.length) => {
+        while (left <= right) {
+            let mid = left + right >> 1
+            if (arr[mid] < target) left = mid + 1
+            else right = mid - 1
+        }
+        return left
+    } 
+    let Tleft = find(T, N)
+    if (N[Tleft] !== T) return [-1,-1]
+    return [Tleft, find(T+1, N, Tleft) - 1]
 };
