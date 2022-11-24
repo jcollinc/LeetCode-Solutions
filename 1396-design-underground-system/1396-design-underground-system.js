@@ -1,7 +1,7 @@
 
 var UndergroundSystem = function() {
     this.trips = {}
-    this.avgTime = {}
+    this.avgInfo = {}
 };
 
 /** 
@@ -11,8 +11,7 @@ var UndergroundSystem = function() {
  * @return {void}
  */
 UndergroundSystem.prototype.checkIn = function(id, stationName, t) {
-    const { trips } = this
-    trips[id] = { startStation: stationName, t}
+    this.trips[id] = {start: stationName, t}
 };
 
 /** 
@@ -22,16 +21,14 @@ UndergroundSystem.prototype.checkIn = function(id, stationName, t) {
  * @return {void}
  */
 UndergroundSystem.prototype.checkOut = function(id, stationName, t) {
-    const { trips, avgTime } = this
-    let prevCheckIn = trips[id]
-    let key = `${prevCheckIn.startStation} to ${stationName}`
-    if (avgTime[key]) {
-        avgTime[key] = {total: avgTime[key].total + t - prevCheckIn.t , count: avgTime[key].count + 1}
+    const {trips, avgInfo} = this
+    let key = `${trips[id].start} to ${stationName}`
+    if (avgInfo[key]) {
+        avgInfo[key] = {totalTime: avgInfo[key].totalTime + t - trips[id].t, count: avgInfo[key].count + 1}
     } else {
-        avgTime[key] = {total: t - prevCheckIn.t, count: 1}
+        avgInfo[key] = {totalTime: t - trips[id].t, count: 1}
     }
     delete trips[id]
-        console.log(trips)
 };
 
 /** 
@@ -40,12 +37,9 @@ UndergroundSystem.prototype.checkOut = function(id, stationName, t) {
  * @return {number}
  */
 UndergroundSystem.prototype.getAverageTime = function(startStation, endStation) {
-    const { avgTime } = this
     let key = `${startStation} to ${endStation}`
-    const {total, count} = avgTime[key]
-    return total / count
-    
-    
+    const {totalTime, count} = this.avgInfo[key]
+    return  totalTime / count
 };
 
 /** 
