@@ -12,7 +12,15 @@ var closeStrings = function(word1, word2) {
     for (let char of word2) {
         charFreq2[char] = charFreq2[char] ? charFreq2[char] + 1 : 1
     }
-    if (JSON.stringify([...Object.keys(charFreq1)].sort()) !== JSON.stringify([...Object.keys(charFreq2)].sort())) return false
-    if (JSON.stringify([...Object.values(charFreq1)].sort()) !== JSON.stringify([...Object.values(charFreq2)].sort())) return false  
+    let idx = 0
+    for (let char of Object.keys(charFreq1).sort()) {
+        if (char !== Object.keys(charFreq2).sort()[idx]) return false
+        idx++
+    }
+    idx = 0
+    for (let char of Object.values(charFreq1).sort()) {
+        if (char !== Object.values(charFreq2).sort()[idx]) return false
+        idx++
+    }
     return true
 };
