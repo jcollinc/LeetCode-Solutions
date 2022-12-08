@@ -24,8 +24,6 @@ var leafSimilar = function(root1, root2) {
     let arr1 = traverse(root1, [])
     let arr2 = traverse(root2, [])
     if (arr1.length !== arr2.length) return false
-    for (let i = 0; i < arr1.length; i++) {
-        if (arr1[i] !== arr2[i]) return false
-    }
-    return true
+    return (arr1.length == arr2.length &&
+            arr1.every((v, i) => v === arr2[i]));
 };
