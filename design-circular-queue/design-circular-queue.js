@@ -34,7 +34,6 @@ MyCircularQueue.prototype.deQueue = function() {
     return true
 };
 
-
 /**
  * @return {number}
  */
@@ -46,21 +45,21 @@ MyCircularQueue.prototype.Front = function() {
  * @return {number}
  */
 MyCircularQueue.prototype.Rear = function() {
-     return this.isEmpty() ? -1 : this.queue[this.tail]
+    return this.isEmpty() ? -1 : this.queue[this.tail]
 };
 
 /**
  * @return {boolean}
  */
 MyCircularQueue.prototype.isEmpty = function() {
-   return this.head === -1
+    return this.head === -1
 };
 
 /**
  * @return {boolean}
  */
 MyCircularQueue.prototype.isFull = function() {
-     return ((this.tail + 1) % this.size) === this.head;
+    return (this.tail + 1) % this.size === this.head
 };
 
 /** 
