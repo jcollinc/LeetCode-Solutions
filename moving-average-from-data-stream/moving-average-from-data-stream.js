@@ -3,7 +3,7 @@
  */
 var MovingAverage = function(size) {
     this.sizeList = new Array()
-    this.left = 0
+    this.start = 0
     this.size = size
     this.sum = 0
 };
@@ -13,10 +13,10 @@ var MovingAverage = function(size) {
  * @return {number}
  */
 MovingAverage.prototype.next = function(val) {
-    if (this.sizeList[this.left]) this.sum -= this.sizeList[this.left]
+    if (this.sizeList[this.start]) this.sum -= this.sizeList[this.start]
     this.sum += val
-    this.sizeList[this.left] = val
-    this.left = (this.left + 1) % this.size
+    this.sizeList[this.start] = val
+    this.start = (this.start + 1) % this.size
     return this.sum / this.sizeList.length
 };
 
