@@ -2,7 +2,7 @@
  * @param {number} k
  */
 var MyCircularQueue = function(k) {
-    this.queue = new Array(k)
+    this.queue = []
     this.head = -1
     this.tail = -1
     this.size = k
@@ -14,7 +14,7 @@ var MyCircularQueue = function(k) {
  */
 MyCircularQueue.prototype.enQueue = function(value) {
     if (this.isFull()) return false
-    if (this.isEmpty()) this.head = 0
+    if (this.head === -1) this.head = 0
     this.tail = (this.tail + 1) % this.size
     this.queue[this.tail] = value
     return true
@@ -38,7 +38,7 @@ MyCircularQueue.prototype.deQueue = function() {
  * @return {number}
  */
 MyCircularQueue.prototype.Front = function() {
-    return this.isEmpty() ? -1 : this.queue[this.head]
+    return this.isEmpty() ? -1 : this.queue[this.head] 
 };
 
 /**
@@ -59,6 +59,7 @@ MyCircularQueue.prototype.isEmpty = function() {
  * @return {boolean}
  */
 MyCircularQueue.prototype.isFull = function() {
+    console.log((this.tail + 1) % this.size, this.head)
     return (this.tail + 1) % this.size === this.head
 };
 
