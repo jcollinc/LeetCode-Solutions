@@ -17,7 +17,7 @@ function numIslands (grid) {
 };
 
 function explore (grid, row, col) {
-    if (row < 0 || col < 0 || row >= grid.length || col >= grid[0].length || grid[row][col] == 0) return
+    if (row < 0 || col < 0 || row >= grid.length || col >= grid[0].length || grid[row][col] == "0") return
     let directions = [[0,1],[0,-1],[1,0],[-1,0]]
     grid[row][col] = 0
     for (let [dx, dy] of directions) {
