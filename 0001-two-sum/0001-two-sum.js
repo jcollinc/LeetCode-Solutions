@@ -3,13 +3,15 @@
  * @param {number} target
  * @return {number[]}
  */
-function twoSum(nums, target) {
-  let ref = new Map()
-  for (let i = 0; i < nums.length; i++) {
-    ref.set(nums[i], i) 
-  }
-  for (let i = 0; i < nums.length; i++) {
-    let check = target - nums[i]
-    if (ref.get(check) && ref.get(check) !== i) return [ref.get(check), i]
-  }
-}
+var twoSum = function(nums, target) {
+    let map = new Map()
+    for (let i = 0; i < nums.length; i++) {
+        map.set(nums[i], i)
+    }
+    for (let i = 0; i < nums.length; i++) {
+        let lookup = target - nums[i]
+        if (map.get(lookup) && map.get(lookup) !== i) {
+            return [map.get(lookup), i]
+        }
+    }
+};
