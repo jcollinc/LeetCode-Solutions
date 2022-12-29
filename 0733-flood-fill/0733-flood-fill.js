@@ -5,15 +5,12 @@
  * @param {number} color
  * @return {number[][]}
  */
-const floodFill = (image, sr, sc, newColor, firstColor = image[sr][sc]) => {
+var floodFill = function(image, sr, sc, color, toChange = image[sr][sc]) {
+    if (sr < 0 || sr >= image.length || sc < 0 || sc >= image[sr].length || image[sr][sc] !== toChange || image[sr][sc] === color) return image
     let directions = [[0,1],[0,-1],[1,0],[-1,0]]
-    if (sr < 0 || sc < 0 || sr >= image.length || sc >= image[sr].length || image[sr][sc] !== firstColor || image[sr][sc] === newColor)   {
-        return image; 
+    image[sr][sc] = color
+    for (let [dy,dx] of directions) {
+        floodFill(image, sr+dy, sc+dx, color, toChange)
     }
-    image[sr][sc] = newColor;
-    for (let [dx,dy] of directions) {
-        floodFill(image, sr + dx, sc + dy, newColor, firstColor);
-    }
-	// return modified image
-    return image;
+    return image
 };
