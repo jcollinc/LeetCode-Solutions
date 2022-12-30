@@ -11,6 +11,5 @@ var isHappy = function(n, seenSet = new Set()) {
         num = parseInt(numString)
         sum += (num * num) 
     }
-    if (sum === 1) return true
-    return isHappy(sum, seenSet)
+    return (sum === 1) ? true : isHappy(sum, seenSet)
 };
