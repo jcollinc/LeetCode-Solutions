@@ -11,11 +11,11 @@
  * @return {boolean}
  */
 var hasCycle = function(head) {
-    let seen = new Set() 
-    let current = head
-    while (!seen.has(current) && current) {
-        seen.add(current)
-        current = current.next
+    let fast = head
+    while (fast && fast.next) {
+        head = head.next
+        fast = fast.next.next
+        if (fast === head) return true
     }
-    return !!current
+    return false
 };
