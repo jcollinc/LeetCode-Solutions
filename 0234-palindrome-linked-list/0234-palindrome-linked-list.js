@@ -28,7 +28,7 @@ var isPalindrome = function(head) {
         if (listLength > mid && isEven || listLength - 1 > mid && !isEven) {
             seenVals.push(current.val)
             listLength--
-        } else if (listLength < mid || (listLength === mid)) {
+        } else if (listLength <= mid) {
             if (seenVals.pop() !== current.val) return false  
         } else listLength--
         current = current.next
