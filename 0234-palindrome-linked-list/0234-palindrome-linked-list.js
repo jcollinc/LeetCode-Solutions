@@ -10,28 +10,16 @@
  * @return {boolean}
  */
 var isPalindrome = function(head) {
-    if (!head.next) return true
-    
-    let listLength = 0
-    let seenVals = []
-    
     let current = head
+    let listArray = []
     while (current) {
+        listArray.push(current.val)
         current = current.next
-        listLength++
     }
-    
-    current = head
-    let mid = Math.floor(listLength / 2)
-    let isEven = listLength % 2 === 0
-    while (current) {
-        if (listLength > mid && isEven || listLength - 1 > mid && !isEven) {
-            seenVals.push(current.val)
-            listLength--
-        } else if (listLength <= mid) {
-            if (seenVals.pop() !== current.val) return false  
-        } else listLength--
-        current = current.next
+    let left = 0, right = listArray.length - 1
+    while (left < right) {
+        if (listArray[left] !== listArray[right]) return false
+        left++, right--
     }
     return true
 };
