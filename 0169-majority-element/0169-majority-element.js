@@ -4,13 +4,10 @@
  */
 var majorityElement = function(nums) {
     let numCount = {}
-    let max = [0,0]
+    let majority = Math.ceil(nums.length / 2)
     for (let num of nums) {
         numCount[num] = 1 + (numCount[num] || 0)
-        if (numCount[num] > max[1]) {
-            max[0] = num
-            max[1] = numCount[num]
-        }
+        if (numCount[num] === majority) return num
     }
-    return max[0]
+    return 0
 };
