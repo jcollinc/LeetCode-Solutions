@@ -3,11 +3,12 @@
  * @return {number}
  */
 var majorityElement = function(nums) {
-    let numCount = {}
-    let majority = Math.ceil(nums.length / 2)
-    for (let num of nums) {
-        numCount[num] = 1 + (numCount[num] || 0)
-        if (numCount[num] === majority) return num
+    let majority = 0
+    let count = 0
+    for (let i = 0; i < nums.length; i++) {
+        if (count === 0) majority = nums[i]
+        if (nums[i] === majority) count++
+        else (count--)
     }
-    return 0
+    return majority
 };
