@@ -3,10 +3,10 @@
  * @return {boolean}
  */
 var containsDuplicate = function(nums) {
-    let numSet = new Set()
+    let numMap = {}
     for (let num of nums) {
-        if (numSet.has(num)) return true
-        numSet.add(num)
+        if (numMap[num]) return true
+        numMap[num] = true
     }
     return false
 };
