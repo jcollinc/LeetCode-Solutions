@@ -23,11 +23,9 @@ UndergroundSystem.prototype.checkIn = function(id, stationName, t) {
 UndergroundSystem.prototype.checkOut = function(id, stationName, t) {
     const {trips, avgInfo} = this
     let key = `${trips[id].start} to ${stationName}`
-    if (avgInfo[key]) {
-        avgInfo[key] = {totalTime: avgInfo[key].totalTime + t - trips[id].t, count: avgInfo[key].count + 1}
-    } else {
-        avgInfo[key] = {totalTime: t - trips[id].t, count: 1}
-    }
+    let updatedTime = avgInfo[key] ? avgInfo[key].totalTime + (t - trips[id].t) : t - trips[id].t
+    let updatedCount = avgInfo[key] ? avgInfo[key].tripCount + 1 : 1
+    avgInfo[key] = {totalTime: updatedTime, tripCount: updatedCount}
     delete trips[id]
 };
 
@@ -38,8 +36,7 @@ UndergroundSystem.prototype.checkOut = function(id, stationName, t) {
  */
 UndergroundSystem.prototype.getAverageTime = function(startStation, endStation) {
     let key = `${startStation} to ${endStation}`
-    const {totalTime, count} = this.avgInfo[key]
-    return  totalTime / count
+    return this.avgInfo[key].totalTime / this.avgInfo[key].tripCount
 };
 
 /** 
