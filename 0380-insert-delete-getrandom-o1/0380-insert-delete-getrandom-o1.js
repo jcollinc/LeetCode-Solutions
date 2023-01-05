@@ -27,8 +27,7 @@ RandomizedSet.prototype.remove = function(val) {
     this.swap(idx, this.list.length - 1)
     this.list.pop()
     this.map.set(this.list[idx], idx)
-    this.map.delete(val)
-    return true
+    return this.map.delete(val)
 };
 
 /**
