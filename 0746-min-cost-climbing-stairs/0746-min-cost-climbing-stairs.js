@@ -3,11 +3,9 @@
  * @return {number}
  */
 var minCostClimbingStairs = function(cost) {
-    let downOne = 0, downTwo = 0
-    for (let i = 2; i < cost.length + 1; i++) {
-        let temp = downOne
-        downOne = Math.min(downOne + cost[i-1], downTwo + cost[i-2])
-        downTwo = temp
+    let minCosts = [0,0]
+    for (let i = 2; i <= cost.length; i++) {
+        minCosts[i] = Math.min(cost[i-2] + minCosts[i-2], cost[i-1] + minCosts[i-1])
     }
-    return downOne
+    return Math.min(minCosts[minCosts.length - 1])
 };
