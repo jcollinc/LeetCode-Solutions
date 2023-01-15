@@ -1,75 +1,45 @@
 /**
- * Definition for singly-linked list.
- * function ListNode(val, next) {
- *     this.val = (val===undefined ? 0 : val)
- *     this.next = (next===undefined ? null : next)
- * }
- */
+ * Definition for singly-linked list. 
+*/
+  function ListNode(val, next) {
+     this.val = (val===undefined ? 0 : val)
+     this.next = (next===undefined ? null : next)
+  }
+
 /**
  * @param {ListNode} l1
  * @param {ListNode} l2
  * @return {ListNode}
  */
 
-class ListNode {
-    constructor(val) {
-        this.val = val
-        this.next = null
-    }
-}
-
-class LinkedList {
-    constructor(head = null) {
-        this.head = head
-    }
-}
-
 var addTwoNumbers = function(l1, l2) {
-    let p1 = l1, p2 = l2, res = [], remainder = []
-    while (p1 && p2) {  
-        let sum = p1.val + p2.val 
-        if (remainder.length) sum += remainder.pop()
-        if (sum > 9) {
-            remainder.push(parseInt(sum.toString()[0]))
-            res.push(parseInt(sum.toString()[1]))
-        } else {
-            res.push(sum)
+    var List = new ListNode(0);
+    var head = List;
+    var sum = 0;
+    var carry = 0;
+
+    while(l1!==null||l2!==null||sum>0){
+
+        if(l1!==null){
+            sum = sum + l1.val;
+            l1 = l1.next;
         }
-        p1 = p1.next
-        p2 = p2.next
-    }
-    if (p1) {
-        while (p1) {
-            let sum = p1.val
-            if (remainder.length) sum += remainder.pop() 
-             if (sum > 9) {
-                    remainder.push(parseInt(sum.toString()[0]))
-                    res.push(parseInt(sum.toString()[1]))
-                } else {
-                    res.push(sum)
-                }
-            p1 = p1.next
+        if(l2!==null){
+            sum = sum + l2.val;
+            l2 = l2.next;
         }
-    } else if (p2) {
-        while (p2) {
-            let sum = p2.val
-            if (remainder.length) sum += remainder.pop() 
-             if (sum > 9) {
-                    remainder.push(parseInt(sum.toString()[0]))
-                    res.push(parseInt(sum.toString()[1]))
-                } else {
-                    res.push(sum)
-                }
-            p2 = p2.next
+        if(sum>=10){
+            carry = 1;
+            sum = sum - 10;
         }
+
+        head.next = new ListNode(sum);
+        head = head.next;
+
+        sum = carry;
+        carry = 0;
+
     }
-    while (remainder.length) res.push(remainder.pop())
-    if (res.length === 1) return new ListNode(res.pop())
-    let l3 = new LinkedList(new ListNode(res)), head = l3
-    for (let i = 0; i < res.length; i++) {
-        l3.val = res[i]
-        if (i < res.length - 1) l3.next = new ListNode()
-        l3 = l3.next
-    }
-    return head
+
+    return List.next;
 };
