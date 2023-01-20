@@ -13,7 +13,7 @@ var merge = function(nums1, m, nums2, n) {
         if (p1 >= m || (p2 < n && nums2[p2] < nums1[p1])) {
             allNums.set(i, nums2[p2])
             p2++
-        } else if (p1 < m) {
+        } else  {
             allNums.set(i, nums1[p1])
             p1++
         }
