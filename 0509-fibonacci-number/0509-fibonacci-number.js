@@ -3,9 +3,11 @@
  * @return {number}
  */
 var fib = function(n) {
-    let fibSums = [0, 1]
+    let first = 0, second = 1
     for (let i = 2; i <= n; i++) {
-        fibSums[i] = fibSums[i-1] + fibSums[i-2]
+        temp = first + second
+        first = second
+        second = temp
     }
-    return fibSums[n]
+    return n < 2 ? n : second
 };
