@@ -7,7 +7,6 @@ var reverse = function(x) {
     if (x < 0) newVal *= -1
     return withinBounds(newVal) ? newVal : 0
 };
-
 function withinBounds (val) {
     return val > -(2**31) && val < (2**31) - 1 
 }
