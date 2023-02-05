@@ -3,20 +3,22 @@
  * @return {number}
  */
 var minMeetingRooms = function(intervals) {
-    intervals.sort((a, b) => a[0] - b[0])
-    let rooms = []
+    intervals.sort((a,b) => a[0] - b[0]) 
+    let rooms = [], count = 0
     for (let meeting of intervals) {
-        roomFinder(meeting)
+        roomFinder(meeting[0], meeting[1])
     }
-    function roomFinder(meeting) {
+    return count
+    function roomFinder(start, end) {
         for (let room of rooms) {
-            if (meeting[0] >= room[1]) {
-                room[0] = meeting[0]
-                room[1] = meeting[1]
+            if (start >= room[1]) {
+                room[0] = start
+                room[1] = end
                 return
-            }
+            } 
         }
-        rooms.push(meeting)
+        rooms.push([start, end])
+        count++
     }
-    return rooms.length
+    return count
 };
