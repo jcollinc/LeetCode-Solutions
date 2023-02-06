@@ -3,15 +3,11 @@
  * @return {boolean}
  */
 var isValid = function(s) {
-    if (s.length % 2 !== 0) return false
-    let validParens = {"(":")", "[":"]", "{":"}"}
     let stack = []
+    let dict = new Map([["(", ")"], ["{", "}"], ["[", "]"]])
     for (let char of s) {
-        if (validParens[char]) {
-            stack.push(validParens[char])
-        } else if (stack.pop() !== char) {
-            return false
-        }
+        if (dict.has(char)) stack.push(dict.get(char))
+        else if (char !== stack.pop()) return false
     }
-    return (!stack.length)
+    return stack.length === 0
 };
