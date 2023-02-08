@@ -2,14 +2,21 @@
  * @param {number} n
  * @return {boolean}
  */
-var isHappy = function(n, seenSet = new Set()) {
-    if (seenSet.has(n)) return false
-    else seenSet.add(n)
-    let nString = n.toString()
-    let sum = 0
-    for (let numString of nString) {
-        num = parseInt(numString)
-        sum += (num * num) 
+var isHappy = function(n) {
+    let slow = n, fast = sumSquares(n)
+    while (slow !== fast) {
+        if (fast === 1) return true
+        slow = sumSquares(slow)
+        fast = sumSquares(sumSquares(fast))
     }
-    return (sum === 1) ? true : isHappy(sum, seenSet)
+    return fast === 1
 };
+
+function sumSquares(n) {
+    let sum = 0
+    let num = n.toString()
+    for (let char of num) {
+        sum += (parseInt(char) ** 2)
+    } 
+    return sum
+}
