@@ -10,14 +10,12 @@
  * @return {ListNode}
  */
 var deleteMiddle = function(head) {
-    let left = head, slow = head, right = head, fast = head
+    if (!head || !head.next) return null
+    slow = head, fast = head.next.next
     while (fast && fast.next) {
-        left = slow
         slow = slow.next
-        right = slow.next
         fast = fast.next.next
     }
-    if (left === right) return null
-    left.next = right
+    slow.next = slow.next.next
     return head
 };
