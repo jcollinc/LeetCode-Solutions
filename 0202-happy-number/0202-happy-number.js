@@ -17,8 +17,7 @@ function sumSquares(n) {
     while (n > 0) {
         let toSquare = n % 10
         sum += toSquare**2
-        n -= toSquare
-        n /= 10
+        n = Math.floor(n/10)
     }
     return sum
 }
