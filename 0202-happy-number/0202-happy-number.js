@@ -14,9 +14,11 @@ var isHappy = function(n) {
 
 function sumSquares(n) {
     let sum = 0
-    let num = n.toString()
-    for (let char of num) {
-        sum += (parseInt(char) ** 2)
-    } 
+    while (n > 0) {
+        let toSquare = n % 10
+        sum += toSquare**2
+        n -= toSquare
+        n /= 10
+    }
     return sum
 }
