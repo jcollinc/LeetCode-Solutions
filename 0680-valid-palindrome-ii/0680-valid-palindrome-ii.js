@@ -15,6 +15,7 @@ function helper (s, side) {
             right--
         } else {
             mismatch++
+            if (mismatch > 1) return false
             side ? left++ : right--
         }
     }
