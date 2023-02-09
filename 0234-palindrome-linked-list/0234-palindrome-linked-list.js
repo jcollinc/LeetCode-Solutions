@@ -10,7 +10,6 @@
  * @return {boolean}
  */
 var isPalindrome = function(head) {
-    if (!head.next) return true
     let slow = head, fast = head, len = 0
     while (fast.next && fast.next.next) {
         slow = slow.next
