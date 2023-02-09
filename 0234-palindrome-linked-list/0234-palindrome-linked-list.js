@@ -10,16 +10,29 @@
  * @return {boolean}
  */
 var isPalindrome = function(head) {
-    let current = head
-    let listArray = []
-    while (current) {
-        listArray.push(current.val)
-        current = current.next
+    if (!head.next) return true
+    let slow = head, fast = head, len = 0
+    while (fast.next && fast.next.next) {
+        slow = slow.next
+        fast = fast.next.next
+        len++
     }
-    let left = 0, right = listArray.length - 1
-    while (left < right) {
-        if (listArray[left] !== listArray[right]) return false
-        left++, right--
+    let curr = slow.next, prev = null 
+    while (curr) {
+        let toReverse = curr.next
+        curr.next = prev
+        prev = curr
+        curr = toReverse
+    }
+    slow.next = prev
+    slow = head, fast = head
+    for (let i = 0; i <= len; i++) {
+        fast = fast.next
+    }
+    while (fast) {
+        if (slow.val !== fast.val) return false
+        slow = slow.next
+        fast = fast.next
     }
     return true
 };
