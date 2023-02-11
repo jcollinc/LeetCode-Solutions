@@ -11,15 +11,8 @@
  * @param {number} targetSum
  * @return {boolean}
  */
-var hasPathSum = function(root, targetSum, sum = 0) {
+var hasPathSum = function(root, targetSum) {
     if (!root) return false
-    
-    sum += root.val
-    
-    if (!root.left && !root.right) return sum === targetSum
-    
-    let left = hasPathSum(root.left, targetSum, sum)
-    let right = hasPathSum(root.right, targetSum, sum)
-    
-    return left || right
+    if (!root.left && !root.right) return root.val === targetSum
+    return hasPathSum(root.left, targetSum - root.val) || hasPathSum(root.right, targetSum - root.val)
 };
