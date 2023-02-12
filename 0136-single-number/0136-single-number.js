@@ -3,11 +3,11 @@
  * @return {number}
  */
 var singleNumber = function(nums) {
-    let numCounts = new Map()
-    for (let num of nums) {
-        numCounts.set(num, 1 + (numCounts.get(num) || 0))
+    if (nums.length === 1) return nums[0]
+    nums.sort((a,b) => a - b) 
+    for (let i = 0; i < nums.length - 1;) {
+        if (nums[i] !== nums[i+1]) return nums[i]
+        i += 2
     }
-    for (let [num, count] of numCounts) {
-        if (count === 1) return num
-    }
+    return nums[nums.length - 1]
 };
