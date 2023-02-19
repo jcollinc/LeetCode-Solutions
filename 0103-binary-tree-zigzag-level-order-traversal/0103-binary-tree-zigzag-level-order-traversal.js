@@ -15,12 +15,12 @@ var zigzagLevelOrder = function(root) {
     let queue = [[root, true, 0]], traverse = []
     while (queue.length) {
         let curr = queue.pop(), [node, dir, level] = curr
+        
         if (!node) continue
-        if (dir) {
-            traverse[level] ? traverse[level].unshift(node.val) : traverse[level] = [node.val]
-        } else {
-           traverse[level] ? traverse[level].push(node.val) : traverse[level] = [node.val] 
-        }
+        if (!traverse[level]) traverse[level] = []
+        
+        dir ? traverse[level].unshift(node.val) : traverse[level].push(node.val)
+
         if (node.left) queue.push([node.left, !dir, level+1])
         if (node.right) queue.push([node.right, !dir, level+1])
     }
