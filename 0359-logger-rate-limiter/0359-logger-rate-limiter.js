@@ -9,17 +9,11 @@ var Logger = function() {
  * @return {boolean}
  */
 Logger.prototype.shouldPrintMessage = function(timestamp, message) {
-    if (this.logs.has(message)) {
-        let prevTime = this.logs.get(message)
-        if (timestamp >= prevTime + 10) {
-            this.logs.set(message, timestamp)
-            return true
-        }
-        return false
-    } else {
+    if (!this.logs.has(message) || timestamp >= this.logs.get(message) + 10) {
         this.logs.set(message, timestamp)
         return true
     }
+    return false
 };
 
 /** 
