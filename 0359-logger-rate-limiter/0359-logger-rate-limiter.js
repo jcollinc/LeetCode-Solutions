@@ -9,8 +9,8 @@ var Logger = function() {
  * @return {boolean}
  */
 Logger.prototype.shouldPrintMessage = function(timestamp, message) {
-    if (!this.logs.has(message) || timestamp >= this.logs.get(message) + 10) {
-        this.logs.set(message, timestamp)
+    if (!this.logs.has(message) || timestamp >= this.logs.get(message)) {
+        this.logs.set(message, timestamp + 10)
         return true
     }
     return false
