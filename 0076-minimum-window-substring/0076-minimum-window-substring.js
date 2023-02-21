@@ -4,41 +4,34 @@
  * @return {string}
  */
 var minWindow = function(s, t) {
+    if (t.length > s.length) return ""
     
-    let arr = new Array(128).fill(0); // Ascii charSet array to store count
-    let result = [-Infinity, Infinity] // result not yet known
-    let missing = t.length; // missing words initially
-    
-    for(let i=0; i < t.length; i++){ // increase the count in arr
-        arr[t.charCodeAt(i)]++
+    const rCount = new Map(), window = new Map()
+
+    for (let char of t) {
+        rCount.set(char, 1 + (rCount.get(char) || 0))
     }
-     
-    let start = 0;
-    
-    for(let end = 0; end < s.length; end++){ // start from 0 and then expand
-        if(arr[s.charCodeAt(end)] > 0){ // element present in t then decrese missing
-            missing--
-        }
-        
-        arr[s.charCodeAt(end)]-- // if not present in t then make it negative
-        
-        while(missing == 0){ // start decrementing start to check the best option
-             if(result[1]-result[0] > end - start){ // store the best answer always
-                result[1] = end; result[0] = start
-            }
-            
-           
-            arr[s.charCodeAt(start)]++ 
-            if(arr[s.charCodeAt(start)] > 0){ // if the char is present in t
-                missing++
-            }
-          
-            start++ 
-        }
-        
-        
+
+    for (let [char, count] of rCount) {
+        window.set(char, 0)
     }
     
-    return result[1] == Infinity ? "" : s.slice(result[0], result[1]+1);
+    let start = 0, current = 0, required = rCount.size, minWin = Infinity, minStr = ""
     
+    for (let end = 0; end < s.length; end++) {
+        if (window.has(s[end])) {
+            window.set(s[end], 1 + (window.get(s[end])))
+            if (window.get(s[end]) === rCount.get(s[end])) current++
+        }
+        while (current === required) {
+            if (end + 1 - start < minWin) {
+               minWin = end + 1 - start
+               minStr = s.slice(start, end + 1)
+            }
+            if (window.has(s[start])) window.set(s[start], window.get(s[start]) - 1)
+            if (rCount.has(s[start]) && window.get(s[start]) < rCount.get(s[start])) current--
+            start++
+        }
+    }
+    return minStr   
 };
