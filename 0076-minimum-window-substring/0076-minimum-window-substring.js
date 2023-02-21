@@ -28,7 +28,7 @@ var minWindow = function(s, t) {
                minWin = end + 1 - start
                minStr = s.slice(start, end + 1)
             }
-            window.set(s[start], window.get(s[start]) - 1)
+            if (window.has(s[start])) window.set(s[start], window.get(s[start]) - 1)
             if (rCount.has(s[start]) && window.get(s[start]) < rCount.get(s[start])) current--
             start++
         }
