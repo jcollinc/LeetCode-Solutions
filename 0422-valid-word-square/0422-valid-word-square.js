@@ -4,11 +4,10 @@
  */
 var validWordSquare = function(words) {
     for (let i = 0; i < words.length; i++) {
-        let word = words[i], compare = ""
-        for (let j = 0; j < words.length && words[j][i]; j++) {
-            compare += words[j][i]
+        let word = words[i]
+        for (let j = 0; j < word.length; j++) {
+            if (!words[j] || word[j] !== words[j][i]) return false
         }
-        if (word !== compare) return false
     }
     return true
 };
