@@ -4,23 +4,14 @@
  * @return {number}
  */
 var findKthPositive = function(arr, k) {
-    let numSet = new Set(), arrSet = new Set()
-    for (let i = 1; i <= arr[arr.length-1]; i++) {
-        numSet.add(i)
-    }
+    let numSet = new Set()
     for (let num of arr) {
-        arrSet.add(num)
+        numSet.add(num)
     }
-    console.log(numSet, arrSet)
-    for (let num of numSet) {
-        if (!arrSet.has(num)) k--
-        if (k === 0) return num
-    }
-    
-    let curr = arr[arr.length-1]
+    let curr = 1
     while (k > 0) {
-        curr++
-        k--
+        if (!numSet.has(curr)) k--
+        if (k > 0) curr++
     }
     return curr
 };
