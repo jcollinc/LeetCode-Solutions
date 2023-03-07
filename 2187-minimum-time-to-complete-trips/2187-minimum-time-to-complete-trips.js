@@ -3,15 +3,28 @@
  * @param {number} totalTrips
  * @return {number}
  */
-var minimumTime = function(times, totalTrips) {
-    let left = 1, right = Math.max(...times) * totalTrips
-    while (left < right) {
-        let mid = Math.floor((left + right) / 2), completed = 0
-        for (let time of times) {
-            completed += Math.floor(mid / time)
+var minimumTime = function(time, totalTrips) {
+    let low = 1;
+    let high = Number.MAX_SAFE_INTEGER;
+    let ans = 0;
+    
+    while(low <= high) {
+        let mid = Math.floor(low + (high - low) / 2); // to prevent overflow
+        
+        if(isPossible(time, mid, totalTrips)) {
+            ans = mid
+            high = mid - 1;
+        } else {
+            low = mid + 1;
         }
-        if (completed < totalTrips) left = mid + 1
-        else if (completed >= totalTrips) right = mid
     }
-    return left
+    return ans;
 };
+
+function isPossible(arr, mid, totalTrips) {
+    let trips = 0;
+    for (let i = 0; i < arr.length; i++) {
+      trips += Math.floor(mid / arr[i]);
+    }
+    return trips >= totalTrips;
+}
