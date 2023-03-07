@@ -5,7 +5,7 @@
  */
 var minimumTime = function(time, totalTrips) {
     let low = 1;
-    let high = Number.MAX_SAFE_INTEGER;
+    let high = Math.max(...time) * totalTrips;
     let ans = 0;
     
     while(low <= high) {
