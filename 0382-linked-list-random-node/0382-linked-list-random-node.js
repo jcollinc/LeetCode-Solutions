@@ -10,25 +10,18 @@
  */
 var Solution = function(head) {
     this.list = head
-    this.length = 0
-    
-    let temp = head
-    while (temp) {
-        temp = temp.next
-        this.length++
-    }
 };
 
 /**
  * @return {number}
  */
 Solution.prototype.getRandom = function() {
-    let random = Math.floor(Math.random() * this.length), curr = this.list
-    while (random > 0) {
+    let curr = this.list, listVals = []
+    while (curr) {
+        listVals.push(curr.val)
         curr = curr.next
-        random--
     }
-    return curr.val
+    return listVals[Math.floor(Math.random() * listVals.length)]
 };
 
 /** 
