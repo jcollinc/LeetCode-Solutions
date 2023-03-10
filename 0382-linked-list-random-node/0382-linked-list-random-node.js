@@ -16,12 +16,15 @@ var Solution = function(head) {
  * @return {number}
  */
 Solution.prototype.getRandom = function() {
-    let curr = this.list, listVals = []
+    let curr = this.list, res = null, i = 1
     while (curr) {
-        listVals.push(curr.val)
+        if (Math.random() < 1/i) {
+            res = curr.val
+        }
         curr = curr.next
+        i++
     }
-    return listVals[Math.floor(Math.random() * listVals.length)]
+    return res
 };
 
 /** 
