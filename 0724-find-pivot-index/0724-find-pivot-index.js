@@ -4,11 +4,11 @@
  */
 var pivotIndex = function(nums) {
     let total = nums.reduce((a,b) =>a+b), idx = 0, leftSum = 0, rightSum = total
-    while (idx < nums.length) {
-        leftSum += (nums[idx-1] || 0)
-        rightSum -= nums[idx]
-        idx++
-        if (leftSum === rightSum) break
+    for (let i = 0; i <= nums.length; i++) {
+        let curr = nums[i];
+        rightSum -= curr;
+        if (leftSum === rightSum) return i;
+        leftSum += curr;
     }
-    return leftSum === rightSum ? idx - 1 : -1
+    return -1
 };
