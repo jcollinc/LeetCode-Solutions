@@ -3,7 +3,7 @@
  * @return {number}
  */
 var pivotIndex = function(nums) {
-    let total = nums.reduce((a,b) =>a+b), idx = 0, leftSum = 0, rightSum = total
+    let rightSum = nums.reduce((a,b) =>a+b), leftSum = 0
     for (let i = 0; i <= nums.length; i++) {
         let curr = nums[i];
         rightSum -= curr;
