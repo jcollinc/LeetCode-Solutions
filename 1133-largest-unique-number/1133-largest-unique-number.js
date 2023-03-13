@@ -3,13 +3,13 @@
  * @return {number}
  */
 var largestUniqueNumber = function(nums) {
-    nums.sort((a,b) => b - a) 
-    let seen = new Set()
-    let max = -1
+    let numCounts = new Map() 
     for (let num of nums) {
-        if (!seen.has(num)) max = Math.max(max, num)
-        else if (seen.has(num) && num >= max) max = -1
-        seen.add(num)
+        numCounts.set(num, 1 + (numCounts.get(num) || 0))
+    }
+    let max = -1
+    for (let [num, count] of numCounts) {
+        if (count === 1) max = Math.max(num, max)
     }
     return max
 };
