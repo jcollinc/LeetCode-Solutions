@@ -16,7 +16,7 @@ var sumNumbers = function(root) {
     
     function getNums(node, num) {
         if (!node) return
-        if (!hasChildren(node)) {
+        if (!(node.left || node.right)) {
             num += node.val.toString()
             sum += parseInt(num)
             return
@@ -30,5 +30,5 @@ var sumNumbers = function(root) {
 };
     
 function hasChildren(node) {
-    return node.left || node.right
+    return 
 }
