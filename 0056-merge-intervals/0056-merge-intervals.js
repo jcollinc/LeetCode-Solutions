@@ -3,6 +3,7 @@
  * @return {number[][]}
  */
 var merge = function(v) {
+    if (v.length === 1) return v
     v.sort((a,b) => a[0] - b[0])
     let res = [v[0]]
     for (let i = 1; i < v.length; i++) {
