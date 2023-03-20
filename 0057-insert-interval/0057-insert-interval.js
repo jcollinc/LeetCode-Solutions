@@ -11,7 +11,6 @@ var insert = function (intervals, newInterval) {
   for (const interval of intervals) {
     const [currStart, currEnd] = interval;
 	
-	// current interval is smaller than newInterval
     if (currEnd < newStart) left.push(interval);
       
     else if (currStart > newEnd) right.push(interval);
