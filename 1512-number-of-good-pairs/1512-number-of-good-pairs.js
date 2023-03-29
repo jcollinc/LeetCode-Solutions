@@ -8,11 +8,8 @@ var numIdenticalPairs = function(nums) {
         counts.set(num, 1 + (counts.get(num) || 0))
     }
     for (let [num, count] of counts) {
-        let temp = count - 1
-        while (temp > 0) {
-            output += temp
-            temp--
-        }
+        count--
+        output += ((count * (count + 1)) / 2)
     }
     return output
 };
