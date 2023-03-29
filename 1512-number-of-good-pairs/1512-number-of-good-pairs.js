@@ -3,11 +3,16 @@
  * @return {number}
  */
 var numIdenticalPairs = function(nums) {
-    let res = 0
-    for (let i = 0; i < nums.length - 1; i++) {
-        for (let j = i + 1; j < nums.length; j++) {
-            if (nums[i] === nums[j]) res++
+    let counts = new Map(), output = 0
+    for (let num of nums) {
+        counts.set(num, 1 + (counts.get(num) || 0))
+    }
+    for (let [num, count] of counts) {
+        let temp = count - 1
+        while (temp > 0) {
+            output += temp
+            temp--
         }
     }
-    return res
+    return output
 };
