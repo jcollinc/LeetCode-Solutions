@@ -4,7 +4,7 @@
  * @param {number} small
  */
 var ParkingSystem = function(big, medium, small) {
-    this.parkingLot = new Map([[1, big], [2, medium], [3, small]])
+    this.parkingLot = [big, medium, small]
 };
 
 /** 
@@ -12,11 +12,7 @@ var ParkingSystem = function(big, medium, small) {
  * @return {boolean}
  */
 ParkingSystem.prototype.addCar = function(carType) {
-    if (this.parkingLot.get(carType)) {
-        this.parkingLot.set(carType, this.parkingLot.get(carType) - 1)
-        return true
-    }
-    return false
+    return this.parkingLot[carType-1]-- > 0
 };
 
 /** 
