@@ -11,11 +11,11 @@
  * @return {Interval[]}
  */
 var employeeFreeTime = function(schedule) {
-    let allIntervals = schedule.reduce( (a,b) => [...a, ...b]).sort( (a,b) => a.start - b.start )
-    let output = [], nextEnd = allIntervals[0].end
-    for (let interval of allIntervals) {
-        if (interval.start > nextEnd) output.push(new Interval(nextEnd, interval.start))
-        nextEnd = Math.max(nextEnd, interval.end)
+    let intervals = schedule.reduce( (a,b) => [...a, ...b]).sort( (a,b) => a.start - b.start )
+    let output = [], nextEnd = intervals[0].end
+    for (let i = 1; i < intervals.length; i++) {
+        if (intervals[i].start > nextEnd) output.push(new Interval(nextEnd, intervals[i].start))
+        nextEnd = Math.max(nextEnd, intervals[i].end)
     }
     return output
 };
