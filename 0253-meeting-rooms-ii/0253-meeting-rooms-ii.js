@@ -10,15 +10,16 @@ var minMeetingRooms = function(intervals) {
     }
     return count
     function roomFinder(start, end) {
-        for (let room of rooms) {
-            if (start >= room[1]) {
-                room[0] = start
-                room[1] = end
+        for (let i = 0; i < rooms.length; i++) {
+            if (start >= rooms[i]) {
+                rooms[i] = end
                 return
             } 
         }
-        rooms.push([start, end])
+        rooms.push(end)
         count++
+        console.log(rooms)
     }
+    
     return count
 };
