@@ -3,11 +3,12 @@
  * @return {number}
  */
 var subtractProductAndSum = function(n) {
-    let sum = 0, mult = 1
-    n = n.toString()
-    for (let num of n) {
-        sum += parseInt(num)
-        mult *= parseInt(num)
+    let sum = 0, product = 1
+    while (n > 0) {
+        let mod = n % 10
+        sum += (mod)
+        product *= (mod)
+        n = Math.floor(n / 10)
     }
-    return mult - sum
+    return product - sum
 };
