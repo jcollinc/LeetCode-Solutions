@@ -3,7 +3,7 @@
  * @return {number}
  */
 var minPartitions = function(n) {
-    let arr = []
-    for (let char of n) arr.push(parseInt(char))
-    return Math.max(...arr)
+    let max = 0
+    for (let char of n) max = Math.max(max, parseInt(char))
+    return max
 };
