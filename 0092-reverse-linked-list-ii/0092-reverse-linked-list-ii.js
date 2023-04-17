@@ -11,31 +11,19 @@
  * @param {number} right
  * @return {ListNode}
  */
-var reverseBetween = function(head, left, right) {
-    let curr = head, prev = null, tracker = 0, reverseCount = right - left
-    if (reverseCount === 0) return head
-    var reverseList = function(node, reverseCount) {
-        let curr = node, prev = null
-        while (curr && reverseCount) {
-            let toReverse = curr.next
-            curr.next = prev
-            prev = curr
-            curr = toReverse
-            reverseCount--
-        }
-        node.next = curr
-        return prev
-    };
-    
-    while (curr) {
-        if (tracker === left - 1) {
-            let reversed = reverseList(curr, right - left + 1)
-            if (left === 1) return reversed
-            prev.next = reversed
-            return head
-        }
-        else prev = curr, curr = curr.next
-        tracker++
+  function reverseBetween(head, m, n) {
+    if (!head || m === n) return head;
+    let p = new ListNode(null);
+    let dummy = p;
+    dummy.next = head;
+    for (let i = 0; i < m - 1; i++) p = p.next;
+    let tail = p.next;
+
+    for (let i = 0; i < n - m; i++) {
+      let tmp = p.next;
+      p.next = tail.next;
+      tail.next = tail.next.next;
+      p.next.next = tmp;
     }
-    return head
-};
+    return dummy.next;
+  }
