@@ -11,6 +11,8 @@ var productExceptSelf = function (nums) {
     product *= nums[i];
   }
 
+  console.log(res)  
+
   product = 1;
 
   for (let j = nums.length - 1; j >= 0; j--) {
