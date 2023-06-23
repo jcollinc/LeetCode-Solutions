@@ -9,22 +9,22 @@ var isValidSudoku = function(board) {
         box = new Set();
 
     for (let j = 0; j < 9; j++) {
-      let _row = board[i][j];
-      let _col = board[j][i];
-      let _box = board[3*Math.floor(i/3)+Math.floor(j/3)][3*(i%3)+(j%3)]
+      let rowSweep = board[i][j];
+      let colSweep = board[j][i];
+      let boxSweep = board[3*Math.floor(i/3)+Math.floor(j/3)][3*(i%3)+(j%3)]
       
-      if (_row != '.') {
-        if (row.has(_row)) return false;
-        row.add(_row);
+      if (rowSweep != '.') {
+        if (row.has(rowSweep)) return false;
+        row.add(rowSweep);
       }
-      if (_col != '.') {
-        if (col.has(_col)) return false;
-        col.add(_col);
+      if (colSweep != '.') {
+        if (col.has(colSweep)) return false;
+        col.add(colSweep);
       }
       
-      if (_box != '.') {
-        if (box.has(_box)) return false;
-        box.add(_box);
+      if (boxSweep != '.') {
+        if (box.has(boxSweep)) return false;
+        box.add(boxSweep);
       } 
     }
   }
