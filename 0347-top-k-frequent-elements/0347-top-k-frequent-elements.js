@@ -13,10 +13,7 @@ var topKFrequent = function(nums, k) {
     for (let [num, count] of counts) {
         countsArr.push([num, count])
     }
-    
     countsArr.sort((a,b) => b[1] - a[1])
-    
     countsArr.length = k 
-    
     return countsArr.map((a) => a[0])
 };
