@@ -8,11 +8,13 @@ var minSwaps = function(nums) {
     for (let num of nums) {
         if (num === 1) oneCount++
     }
+    if (oneCount === nums.length) return 0
 // Calculate number of zeroes in initial window of size oneCount
     let zeroCount = 0
     for (let i = 0; i < oneCount; i++) {
         if (nums[i] === 0) zeroCount++
     }
+    if (zeroCount === 0) return 0
 // Iterate through nums by sliding the window until 'start' reaches the last value
 // Track minimum number of zeroes in each window
     let end = oneCount-1, minZero = zeroCount
@@ -20,6 +22,7 @@ var minSwaps = function(nums) {
         if (nums[start] === 0) zeroCount--
         end = (end + 1) % nums.length
         if (nums[end] === 0) zeroCount++
+        if (zeroCount === 0) return 0
         minZero = Math.min(minZero, zeroCount)
     }
     return minZero
