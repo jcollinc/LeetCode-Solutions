@@ -2,6 +2,7 @@
 var MyQueue = function() {
     this.stack1 = []
     this.stack2 = []
+    this.front = null
 };
 
 /** 
@@ -9,42 +10,47 @@ var MyQueue = function() {
  * @return {void}
  */
 MyQueue.prototype.push = function(x) {
+    if (this.stack1.length === 0) this.front = x
     this.stack1.push(x)
 };
 
 /**
  * @return {number}
  */
+
+
 MyQueue.prototype.pop = function() {
-    while (this.stack1.length) {
+    let n1 = this.stack1.length
+    
+    for (let i = 0; i < n1 - 1; i++) {
         this.stack2.push(this.stack1.pop())
     }
-    let pop = this.stack2.pop()
-    while (this.stack2.length) {
+    
+    this.front = this.stack2[this.stack2.length - 1] || null
+    
+    let output = this.stack1.pop()
+    
+    let n2 = this.stack2.length
+    
+    for (let i = 0; i < n2; i++) {
         this.stack1.push(this.stack2.pop())
     }
-    return pop
+
+    return output
 };
 
 /**
  * @return {number}
  */
 MyQueue.prototype.peek = function() {
-    while (this.stack1.length) {
-        this.stack2.push(this.stack1.pop())
-    }
-    let peek = this.stack2[this.stack2.length-1]
-    while (this.stack2.length) {
-        this.stack1.push(this.stack2.pop())
-    }
-    return peek
+    return this.front
 };
 
 /**
  * @return {boolean}
  */
 MyQueue.prototype.empty = function() {
-    return !this.stack1.length
+    return this.front === null
 };
 
 /** 
