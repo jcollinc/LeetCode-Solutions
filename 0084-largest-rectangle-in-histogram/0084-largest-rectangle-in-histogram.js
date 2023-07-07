@@ -6,6 +6,7 @@ var largestRectangleArea = function(heights) {
     let maxArea = 0, minHeight = 0
     for (let i = 0; i < heights.length; i++) {
         if (minHeight === heights[i]) continue
+        minHeight = heights[i]
         let temp = i, width = 0
         while (heights[temp] <= heights[i] && i < heights.length) {
             width++
@@ -16,8 +17,7 @@ var largestRectangleArea = function(heights) {
             width++
             i--
         }
-        minHeight = heights[temp]
-        maxArea = Math.max(maxArea, width * heights[temp], heights[temp])
+        maxArea = Math.max(maxArea, width * heights[temp])
         i = temp
     }
     return maxArea
