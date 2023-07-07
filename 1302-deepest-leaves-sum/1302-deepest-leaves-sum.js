@@ -11,14 +11,14 @@
  * @return {number}
  */
 var deepestLeavesSum = function(root) {
-    let sum = new Map(), maxDepth = 0
+    let maxDepthSum = [0,0]
     function dfs(node, currDepth) {
         if (!node) return
-        sum.set(currDepth, node.val + (sum.get(currDepth) || 0))
-        maxDepth = Math.max(maxDepth, currDepth)
+        if (currDepth > maxDepthSum[0]) maxDepthSum = [currDepth, node.val]
+        else if (currDepth === maxDepthSum[0]) maxDepthSum[1] += node.val
         dfs(node.left, currDepth + 1)
         dfs(node.right, currDepth + 1) 
     }
     dfs(root, 0)
-    return sum.get(maxDepth)
+    return maxDepthSum[1]
 };
