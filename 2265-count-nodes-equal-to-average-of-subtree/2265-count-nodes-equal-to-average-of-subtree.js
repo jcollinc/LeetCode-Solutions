@@ -16,7 +16,8 @@ var averageOfSubtree = function(root) {
         if (!node) return [0,0]
         let [leftSum, leftCount] = traverse(node.left)
         let [rightSum, rightCount] = traverse(node.right)
-        let sum = node.val + leftSum + rightSum, count = leftCount + rightCount + 1
+        let sum = node.val + leftSum + rightSum
+        let count = 1 + leftCount + rightCount
         if (Math.floor(sum / count) === node.val) res++
         return [sum, count]
     }
