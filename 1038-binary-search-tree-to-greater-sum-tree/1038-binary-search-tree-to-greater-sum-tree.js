@@ -18,7 +18,7 @@ var bstToGst = function(root) {
         node.val += sum
         sum = node.val
         convertBST(node.left)
+        return node
     }
-    convertBST(root)
-    return root
+    return convertBST(root)
 };
