@@ -3,8 +3,13 @@
  * @return {number[]}
  */
 var runningSum = function(nums) {
-    for (let i = 1; i < nums.length; i++) {
-        nums[i] = nums[i] + nums[i-1]
+    let sum = 0
+    function recurse(array, idx) {
+        if (idx >= nums.length) return
+        nums[idx] = nums[idx] + sum
+        sum = nums[idx]
+        recurse(nums, idx + 1)
     }
+    recurse(nums, 0)
     return nums
 };
