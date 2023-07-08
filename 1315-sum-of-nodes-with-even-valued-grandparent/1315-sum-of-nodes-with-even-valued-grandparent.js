@@ -15,11 +15,8 @@ var sumEvenGrandparent = function(root) {
     function traverse(node, gp, p) {
         if (!node) return
         if (gp && gp % 2 === 0) sum += node.val
-        gp = p
-        p = node.val
-        traverse(node.left, gp, p)
-        traverse(node.right, gp, p)
-        return
+        traverse(node.left, p, node.val)
+        traverse(node.right, p, node.val)
     }
     traverse(root, null, null)
     return sum
