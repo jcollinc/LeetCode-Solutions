@@ -50,7 +50,7 @@ MyQueue.prototype.peek = function() {
  * @return {boolean}
  */
 MyQueue.prototype.empty = function() {
-    return this.front === null
+    return !this.front
 };
 
 /** 
