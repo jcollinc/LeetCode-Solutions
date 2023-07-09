@@ -20,19 +20,14 @@ MyQueue.prototype.push = function(x) {
 
 
 MyQueue.prototype.pop = function() {
-    let n1 = this.stack1.length
     
-    for (let i = 0; i < n1 - 1; i++) {
+    while (this.stack1.length > 1) {
         this.stack2.push(this.stack1.pop())
     }
-    
     this.front = this.stack2[this.stack2.length - 1] || null
-    
     let output = this.stack1.pop()
-    
-    let n2 = this.stack2.length
-    
-    for (let i = 0; i < n2; i++) {
+
+    while (this.stack2.length) {
         this.stack1.push(this.stack2.pop())
     }
 
