@@ -5,14 +5,8 @@
 var decompressRLElist = function(nums) {
     let output = [], count
     for (let i = 0; i < nums.length; i++) {
-        if (i % 2 === 0) {
-            count = nums[i]
-        } else {
-            while (count > 0) {
-                output.push(nums[i])
-                count--
-            }
-        }
+        if (i % 2 === 0) count = nums[i]
+        else output.push(...new Array(count).fill(nums[i]))
     }
     return output
 };
