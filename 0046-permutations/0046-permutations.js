@@ -4,24 +4,21 @@
  */
 var permute = function(nums) {
     let res = [];
-    function dfs(nums, path, used) {
-        if (path.length == nums.length) {
-            res.push([...path]);
-            return;
+    function dfs(path, seen) {
+        if (path.length === nums.length) {
+            res.push([...path])
+            return
         }
         for (let i = 0; i < nums.length; i++) {
-            // skip used nums
-            if (used[i]) continue;
-            // add letter to permutation, mark letter as used
-            path.push(nums[i]);
-            used[i] = true;
-            dfs(nums, path, used);
-            // remove letter from permutation, mark letter as unused
-            path.pop();
-            used[i] = false;
+            if (seen.has(i)) continue
+            seen.add(i)
+            path.push(nums[i])
+            dfs(path, seen)
+            path.pop()
+            seen.delete(i)
         }
     }
-    dfs(nums, [], Array(nums.length).fill(false));
+    dfs([], new Set());
     return res;
 }
 
