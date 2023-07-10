@@ -8,10 +8,8 @@
 var combinationSum = function(candidates, target) {
     let validCombos = []
     function dfs(combo, sum, idx) {
-        if (sum > target) {
-            return
-        }else if (sum === target) {
-            validCombos.push([...combo])
+        if (sum >= target) {
+            if (sum === target) validCombos.push([...combo])
             return
         }
         for (let i = idx; i < candidates.length; i++) {
