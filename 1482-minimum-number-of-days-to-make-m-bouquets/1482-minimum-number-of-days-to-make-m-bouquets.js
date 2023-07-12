@@ -31,7 +31,6 @@ var minDays = function(bloomDay, m, k) {
         canCreateAllBouquets(mid) >= m ? right = mid : left = mid + 1
     }
     
-    console.log(left, right, canCreateAllBouquets(left))
     return canCreateAllBouquets(left) >= m ? left : -1
 };
 
