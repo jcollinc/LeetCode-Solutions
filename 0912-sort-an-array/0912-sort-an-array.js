@@ -16,6 +16,6 @@ function merge(leftArr, rightArr) {
     while (l < leftArr.length && r < rightArr.length) {
         sortedArray.push(leftArr[l] <= rightArr[r] ? leftArr[l++] : rightArr[r++])
     }
-    return sortedArray.concat(leftArr.slice(l)).concat(rightArr.slice(r));
+    return [...sortedArray, ...leftArr.slice(l), ...rightArr.slice(r)]
 }
 
