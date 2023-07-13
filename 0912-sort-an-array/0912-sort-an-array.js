@@ -6,16 +6,16 @@
 var sortArray = function(nums) {
     if (nums.length < 2) return nums
     let mid = Math.floor(nums.length / 2)
-    let leftArr = nums.slice(0, mid)
-    let rightArr = nums.slice(mid)
-    return merge(sortArray(leftArr), sortArray(rightArr))
-};
+    let left = nums.slice(0, mid)
+    let right = nums.slice(mid)
+    return merge(sortArray(left), sortArray(right))
+}
 
-function merge(leftArr, rightArr) {
-    let sortedArray = [], l = 0, r = 0
-    while (l < leftArr.length && r < rightArr.length) {
-        sortedArray.push(leftArr[l] <= rightArr[r] ? leftArr[l++] : rightArr[r++])
+const merge = (left, right) => {
+    let sorted = [], [l,r] = [0,0]
+    while (l < left.length && r < right.length) {
+        sorted.push(left[l] < right[r] ? left[l++] : right[r++])
     }
-    return [...sortedArray, ...leftArr.slice(l), ...rightArr.slice(r)]
+    return [...sorted, ...left.slice(l), ...right.slice(r)]
 }
 
