@@ -11,9 +11,10 @@ var sortArray = function(nums) {
 };
 
 function merge(leftArr, rightArr) {
-    let sortedArray = []
-    while (leftArr.length && rightArr.length) {
-        sortedArray.push(leftArr[0] <= rightArr[0] ? leftArr.shift() : rightArr.shift())
+    let sortedArray = [], l = 0, r = 0
+    while (l < leftArr.length && r < rightArr.length) {
+        sortedArray.push(leftArr[l] <= rightArr[r] ? leftArr[l++] : rightArr[r++])
     }
-    return [...sortedArray, ...leftArr, ...rightArr]
+    return [...sortedArray, ...leftArr.slice(l), ...rightArr.slice(r)]
 }
+
