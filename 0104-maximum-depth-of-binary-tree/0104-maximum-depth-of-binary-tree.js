@@ -12,12 +12,9 @@
  */
 var maxDepth = function(root) {
     let maxDepth = 0
-    function dfs(node, depth = 1) {
-        if (!node) return
-        dfs(node.left, depth+1)
-        dfs(node.right, depth+1)
-        maxDepth = Math.max(depth, maxDepth)
+    function dfs(node, depth=1) {
+        if (!node) return depth-1
+        return Math.max(dfs(node.left, depth+1), dfs(node.right, depth+1))
     }  
-    dfs(root)
-    return maxDepth
+    return dfs(root)
 };
