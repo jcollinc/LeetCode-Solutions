@@ -14,11 +14,7 @@ var levelOrder = function(root) {
     let output = []
     function traverse (node, level = 0) {
         if (!node) return
-        if (output[level]) {
-            output[level].push(node.val)
-        } else {
-            output[level] = [node.val]
-        }
+        output[level] ? output[level].push(node.val) : output[level] = [node.val]
         traverse(node.left, level+1)
         traverse(node.right, level+1)
     }
