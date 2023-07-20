@@ -7,7 +7,7 @@ var numIslands = function(grid) {
     for (let row = 0; row < grid.length; row++) {
         for (let col = 0; col < grid[row].length; col++) {
             if (grid[row][col] === "1") {
-                islandCount++ 
+                islandCount++
                 grid = bfs(grid, row, col)
             }
         }
@@ -15,22 +15,20 @@ var numIslands = function(grid) {
     return islandCount
 };
 
-const bfs = (grid, row, col) => {
-    let queue = [[row, col]]
+function bfs(grid, startRow, startCol) {
     let directions = [[0,1],[0,-1],[1,0],[-1,0]]
+    let queue = [[startRow,startCol]]
     while (queue.length) {
-        let [r,c] = queue.shift()
-        if (grid[r][c] === "0") continue
-        for (let [rowDx, colDx] of directions) {
-            if (inBound(grid, r+rowDx, c+colDx)) {
-                queue.push([r+rowDx, c+colDx])
-            }
+        let [row,col] = queue.shift()
+        if (grid[row][col] === "0") continue
+        for (let [dy,dx] of directions) {
+            if (row+dy >= 0 
+                && row+dy < grid.length
+                && col+dx >= 0
+                && col+dx < grid[row].length
+            ) queue.push([row+dy, col+dx])
         }
-        grid[r][c] = "0"
+        grid[row][col] = "0"
     }
     return grid
-}
-
-const inBound = (grid, r,c) => {
-    return (r >= 0 && c >= 0 && r < grid.length && c < grid[r].length)
 }
