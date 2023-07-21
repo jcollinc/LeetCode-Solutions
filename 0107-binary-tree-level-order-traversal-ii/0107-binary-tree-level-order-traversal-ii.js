@@ -13,10 +13,11 @@
 var levelOrderBottom = function(root) {
     let queue = [[root, 0]], output = []
     while(queue.length) {
-        let curr = queue.shift()
-        if (!curr[0]) continue
-        queue.push([curr[0].left, curr[1]+1], [curr[0].right, curr[1]+1])
-        output[curr[1]] ? output[curr[1]].push(curr[0].val) : output[curr[1]] = [curr[0].val]
+        let [node, level] = queue.shift()
+        if (!node) continue
+        if (node.left) queue.push([node.left, level+1])
+        if (node.right) queue.push([node.right, level+1])
+        output[level] ? output[level].push(node.val) : output[level] = [node.val]
     }
     return output.reverse()
 };
