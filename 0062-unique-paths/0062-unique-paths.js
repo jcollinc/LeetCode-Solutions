@@ -4,15 +4,11 @@
  * @return {number}
  */
 var uniquePaths = function(m, n) {
-    let lastRow = new Array(n).fill(1)
-    for (let row = 1; row < m; row++) {
-        let nextRow = []
-        for (let col = 0; col < n; col++) {
-            let top = lastRow[col]
-            let left = nextRow[col-1] || 0
-            nextRow[col] = top + left
+    let row = new Array(n).fill(1)
+    for (i = 1; i < m; i++) {
+        for (let j = 0; j < n; j++) {
+            row[j] = (row[j] + (row[j-1] || 0))
         }
-        lastRow = nextRow
     }
-    return lastRow[n-1]
+    return row[n-1]
 }
