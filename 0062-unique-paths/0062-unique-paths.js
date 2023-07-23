@@ -12,7 +12,7 @@ var uniquePaths = function(m, n) {
             let left = nextRow[col-1] || 0
             nextRow[col] = top + left
         }
-        lastRow = [...nextRow]
+        lastRow = nextRow
     }
     return lastRow[n-1]
 }
