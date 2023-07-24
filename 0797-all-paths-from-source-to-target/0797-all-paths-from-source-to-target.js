@@ -3,16 +3,19 @@
  * @return {number[][]}
  */
 var allPathsSourceTarget = function(graph) {
-    const paths = []
-    function dfs (index, path) {
-        if(path[path.length - 1] == graph.length - 1) {
-            paths.push(path);
-            return;
-        }
-        for(let i = 0; i < graph[index].length; i++) {
-            dfs(graph[index][i], [...path, graph[index][i]])
+    let visited = new Set()
+    let n = graph.length
+    let paths = []
+    let queue = [[graph[0],[0]]]
+    while (queue.length) {
+        let [curr, path] = queue.shift()
+        visited.add(curr)
+        for (let node of curr) {
+            if (node === n-1) paths.push([...path, node])
+            else if (!visited.has(node)) {
+                queue.push([graph[node], [...path, node]])
+            }
         }
     }
-    dfs(0, [0])
     return paths
 };
