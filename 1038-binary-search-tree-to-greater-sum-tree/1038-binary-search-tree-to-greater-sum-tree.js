@@ -12,13 +12,13 @@
  */
 var bstToGst = function(root) {
     let sum = 0
-    function convertBST(node) {
+    function convert(node) {
         if (!node) return
-        convertBST(node.right)
+        convert(node.right)
         node.val += sum
         sum = node.val
-        convertBST(node.left)
-        return node
+        convert(node.left)
     }
-    return convertBST(root)
+    convert(root)
+    return root
 };
