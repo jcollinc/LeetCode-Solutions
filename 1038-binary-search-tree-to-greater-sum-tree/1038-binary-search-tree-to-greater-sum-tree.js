@@ -13,7 +13,7 @@
 var bstToGst = function(root) {
     let sum = 0
     function convert(node) {
-        if (!node) return
+        if (!node) return 
         convert(node.right)
         node.val += sum
         sum = node.val
