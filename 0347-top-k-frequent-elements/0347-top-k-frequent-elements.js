@@ -4,16 +4,36 @@
  * @return {number[]}
  */
 var topKFrequent = function(nums, k) {
-    let counts = new Map()
-    for (let num of nums) {
-        counts.set(num, 1 + (counts.get(num) || 0))
-    }
-    let countsArr = []
+    let max = 0
+    let output = []
+    let frequencyMap = new Map()
+    let reverseMap = new Map()
+    let seen = new Set()
     
-    for (let [num, count] of counts) {
-        countsArr.push([num, count])
+    for (let num of nums) {
+        frequencyMap.set(num, 1 + (frequencyMap.get(num) || 0))
+        max = Math.max(max, frequencyMap.get(num))
     }
-    countsArr.sort((a,b) => b[1] - a[1])
-    countsArr.length = k 
-    return countsArr.map((a) => a[0])
+    
+    for (let [num, frequency] of frequencyMap) {
+        if (!reverseMap.has(frequency)) reverseMap.set(frequency, new Set([num]))
+        else reverseMap.set(frequency, reverseMap.get(frequency).add(num))
+    }
+    
+    let maxHeap = new MaxPriorityQueue()
+    
+    for (let [num, frequency] of frequencyMap) {
+        if (!seen.has(frequency)) maxHeap.enqueue(frequency)
+        seen.add(frequency)
+    }
+    
+    while (k > 0) {
+        let idx = maxHeap.dequeue().element
+        for (let num of reverseMap.get(idx)) {
+            if (k > 0) output.push(num)
+            k--
+        }
+    }
+    
+    return output
 };
