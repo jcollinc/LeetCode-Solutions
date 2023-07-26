@@ -17,19 +17,19 @@ const minSpeedOnTime = (dist, hour) => {
   };
 
   let left = 1, right = 10000000
-  let minimum = Infinity;
+  let minSpeed = Infinity;
 
   while (left <= right) {
     let mid = Math.floor((left + right) / 2);
     if (canMakeItToOffice(mid)) {
-      minimum = Math.min(minimum, mid);
+      minSpeed = Math.min(minSpeed, mid);
       right = mid-1;
     } else {
       left = mid+1;
     }
   }
 
-  return isFinite(minimum) ? minimum : -1;
+  return isFinite(minSpeed) ? minSpeed : -1;
 };
 
 
