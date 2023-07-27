@@ -4,11 +4,7 @@
  * @return {number}
  */
 var maxRunTime = function(n, batteries) {
-    let sumPower = 0;
-    for (let power of batteries) {
-        sumPower += power;
-    }
-    let left = 1, right = Math.floor(sumPower / n);
+    let left = 1, right = Math.floor(batteries.reduce((a,b)=>a+b)/n)
     while (left < right) {
         let mid = Math.floor((left + right + 1) / 2);
         if (canPowerForMidHours(mid, n, batteries)) {
