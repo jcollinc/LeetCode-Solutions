@@ -4,7 +4,10 @@
  */
 const PredictTheWinner = (nums) => {
     let n = nums.length
-    let memo = new Array(n).fill(-1).map(() => new Array(n).fill(-1));
+    let memo = []
+    for (let i = n; i >= 0; i--) {
+        memo.push(new Array(n).fill(-1))
+    }
     let scoreFirst = PredictTheWinnerInSituation(nums, 0, n - 1, memo)
     let scoreTotal = nums.reduce((a,b)=>a+b)
     return scoreFirst >= scoreTotal - scoreFirst
