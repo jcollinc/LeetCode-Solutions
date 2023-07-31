@@ -12,12 +12,12 @@
  */
 var levelOrder = function(root) {
     let output = []
-    function traverse (node, level = 0) {
-        if (!node) return
+    let queue = [[root,0]]
+    while (queue.length) {
+        let [node, level] = queue.shift()
+        if (!node) continue
         output[level] ? output[level].push(node.val) : output[level] = [node.val]
-        traverse(node.left, level+1)
-        traverse(node.right, level+1)
+        queue.push([node.left, level+1], [node.right, level+1])
     }
-    traverse(root)
     return output
 };
