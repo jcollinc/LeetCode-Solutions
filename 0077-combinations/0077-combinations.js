@@ -13,7 +13,6 @@ var combine = function(n, k) {
         for (let i = curr+1; i <= n; i++) {
             getCombination(i, [...combination, i])
         }
-        return
     }
     for (let i = 1; i <= n; i++) {
        getCombination(i,[i]) 
