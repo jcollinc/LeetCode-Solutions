@@ -1,9 +1,6 @@
 Date.prototype.nextDay = function() {
-    this.setDate(this.getDate() + 1);
-    let year = this.getFullYear();
-    let month = String(this.getMonth() + 1).padStart(2, '0');
-    let day = String(this.getDate()).padStart(2, '0');
-    return `${year}-${month}-${day}`;
+  this.setDate(this.getDate()+1)
+  return this.toISOString().split('T')[0]
 }
 
 /**
