@@ -4,18 +4,19 @@
  * @return {number[][]}
  */
 var combine = function(n, k) {
-    let combinations = []
-    const getCombination = (curr, combination) => {
-        if (combination.length === k) {
-            combinations.push([...combination])
-            return
+    const combinations = [];
+    const combo = [];
+    function backtrack(start) {
+        if (combo.length === k) {
+            combinations.push([...combo]);
+            return;
         }
-        for (let i = curr+1; i <= n; i++) {
-            getCombination(i, [...combination, i])
+        for (let i = start; i <= n; i++) {
+            combo.push(i);
+            backtrack(i+1);
+            combo.pop();
         }
     }
-    for (let i = 1; i <= n; i++) {
-       getCombination(i,[i]) 
-    }
-    return combinations
+    backtrack(1);
+    return combinations;    
 };
