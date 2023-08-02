@@ -3,22 +3,21 @@
  * @return {number[][]}
  */
 var permute = function(nums) {
-    let validPerm = []
-    function dfs(possiblePerm, seen) {
-        if (nums.length === possiblePerm.length) {
-            validPerm.push([...possiblePerm])
-            return;
+    let permutations = [], n = nums.length
+    function getPermutations(curr, seen) {
+        if (curr.length === n) {
+            permutations.push([...curr])
+            return
         }
-        for (let i = 0; i < nums.length; i++) {
+        for (let i = 0; i < n; i++) {
             if (seen.has(i)) continue
-            possiblePerm.push(nums[i])
+            curr.push(nums[i])
             seen.add(i)
-            dfs(possiblePerm, seen)
-            possiblePerm.pop()
+            getPermutations([...curr], new Set(seen))
+            curr.pop()
             seen.delete(i)
         }
     }
-    dfs([], new Set())
-    return validPerm
-}
-
+    getPermutations([], new Set())
+    return permutations
+};
