@@ -10,27 +10,25 @@ var ladderLength = function(beginWord, endWord, wordList) {
     const wordSet = new Set(wordList);
     const queue = [[beginWord, 1]];
     const seen = new Set([beginWord]);
+    const alphabet = 'abcdefghijklmnopqrstuvwxyz';
 
     while (queue.length) {
         const [word, level] = queue.shift();
 
         for (let i = 0; i < word.length; i++) {
-            for (let charCode = 97; charCode <= 122; charCode++) {
-                const newWord = word.slice(0, i) + String.fromCharCode(charCode) + word.slice(i + 1);
-                
-                if (wordSet.has(newWord)) {
-                    if (newWord === endWord) {
-                        return level + 1;
-                    }
-                    
-                    if (!seen.has(newWord)) {
-                        seen.add(newWord);
-                        queue.push([newWord, level + 1]);
-                    }
+            for (let j = 0; j < alphabet.length; j++) {
+                const newWord = word.slice(0, i) + alphabet[j] + word.slice(i + 1);
+
+                if (newWord === endWord) {
+                    return level + 1;
+                }
+
+                if (wordSet.has(newWord) && !seen.has(newWord)) {
+                    seen.add(newWord);
+                    queue.push([newWord, level + 1]);
                 }
             }
         }
     }
-    
     return 0;
 };
