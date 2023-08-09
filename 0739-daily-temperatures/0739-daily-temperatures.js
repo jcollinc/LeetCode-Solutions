@@ -2,17 +2,16 @@
  * @param {number[]} temps
  * @return {number[]}
  */
-var dailyTemperatures = function(temps) {
-    let n = temps.length
-    let minHeap = new MinPriorityQueue()
-    let res = new Array(n).fill(0)
-    for (let i = 0; i < n; i++) {
-        if (temps[i] < temps[i+1]) res[i] = 1
-        else if (i < n-1) (minHeap.enqueue(i, temps[i]))
-        while (minHeap.front() && minHeap.front().priority < temps[i]) {
-            let idx = minHeap.dequeue().element
-            res[idx] = i - idx  
-        } 
+var dailyTemperatures = function(temperatures) {
+    let idStack = [], res = new Array(temperatures.length).fill(0);
+    let n = temperatures.length
+    for (let i=0; i<n;i++) {
+        const temp = temperatures[i];
+        while (idStack.length && temp > temperatures[idStack[idStack.length-1]]) {
+            const lastId = idStack.pop();
+            res[lastId] = i - lastId;
+        }
+        idStack.push(i);
     }
-    return res
+    return res;
 };
