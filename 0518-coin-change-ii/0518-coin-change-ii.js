@@ -9,8 +9,8 @@ var change = function(amount, coins) {
     for (let coin of coins) {
         for (let j = coin; j <= amount; j++) {
             dp[j] += dp[j - coin];
+            if (j === amount) console.log(coin, dp)
         }
     }
     return dp[amount];
 };
-
