@@ -19,6 +19,5 @@ var uniquePathsWithObstacles = function(obstacleGrid) {
             else dp[row][col] = dp[row-1][col] + dp[row][col-1]
         }
     }
-    console.log(dp)
     return dp[n-1][m-1]
 };
