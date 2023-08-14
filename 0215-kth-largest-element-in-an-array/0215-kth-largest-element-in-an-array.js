@@ -3,13 +3,17 @@
  * @param {number} k
  * @return {number}
  */
-var findKthLargest = function(nums, k) {
-    let topKQueue = new MaxPriorityQueue, topK
-    for (let num of nums) {
-        topKQueue.enqueue(num)
-    }
-    for (let i=0; i<k; i++) {
-        topK = topKQueue.dequeue().element
-    }
-    return topK
+var findKthLargest = function (nums, k) { 
+	let minHeap = new MinPriorityQueue(k);
+	for (let num of nums) {
+		if (minHeap.size() < k) {
+			minHeap.enqueue(num);
+		} else {
+			if (minHeap.front().element < num) {
+				minHeap.dequeue();
+				minHeap.enqueue(num);
+			}
+		}
+	}
+	return minHeap.dequeue().element;
 };
