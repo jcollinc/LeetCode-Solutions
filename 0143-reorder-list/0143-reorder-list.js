@@ -18,7 +18,7 @@ var reorderList = function(head) {
         cur.next = rev;
         rev = rev.next;
         cur.next.next = temp;
-        cur = temp;
+        cur = cur.next.next;
     }
     middle.next = null;
 };
@@ -30,7 +30,6 @@ var findMiddle = function(head) {
         head = head.next.next;
         middle = middle.next;
     }
-    
     return middle;
 }
 
