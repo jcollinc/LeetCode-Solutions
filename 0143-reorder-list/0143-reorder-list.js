@@ -10,23 +10,41 @@
  * @return {void} Do not return anything, modify head in-place instead.
  */
 var reorderList = function(head) {
-    let reverse = (list) => {
-        let curr = list
-        let prev = null
-        while (curr) {
-            let temp = curr.next
-            curr.next = prev
-            prev = curr
-            curr = temp
-        }
-        return prev
+    if (!head) return;
+    let cur = head, middle = findMiddle(head);
+    let rev = reverseList(middle.next);
+    while (rev) {
+        let temp = cur.next;
+        cur.next = rev;
+        rev = rev.next;
+        cur.next.next = temp;
+        cur = temp;
     }
-    let curr = head
-    while (curr) {
-        curr.next = reverse(curr.next)
-        curr = curr.next
-    }
+    middle.next = null;
 };
+
+var findMiddle = function(head) {
+    if (!head) return;
+    let middle = head;
+    while (head && head.next) {
+        head = head.next.next;
+        middle = middle.next;
+    }
+    
+    return middle;
+}
+
+var reverseList = function(head) {
+    if (!head) return;
+    let prev = null;
+    while (head) {
+        const saved = head.next;
+        head.next = prev;
+        prev = head;
+        head = saved;
+    }
+    return prev;
+}
 
 
 
