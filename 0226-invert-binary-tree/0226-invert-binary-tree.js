@@ -12,7 +12,9 @@
  */
 var invertTree = function(root) {
     if (!root) return root
-    if (root) [root.right, root.left] = [root.left, root.right]
-    invertTree(root.left), invertTree(root.right)
-    return root
+    else{
+        [root.right, root.left] = [root.left, root.right]
+        invertTree(root.left), invertTree(root.right)  
+        return root
+    }    
 };
