@@ -3,14 +3,16 @@
  * @return {boolean}
  */
 var repeatedSubstringPattern = function(s) {
-    let test = s
-    for (let end = 1; end <= s.length / 2; end++) {
-        let candidate = test.slice(0, end)
-        while (candidate === test.slice(test.length-end)) {
-            test = test.slice(0, test.length-end)
-            if (test.length <= 0) return true
+    const n = s.length;
+    for (let i = 1; i <= n / 2; i++) {
+        if (n % i === 0) {
+            const substring = s.slice(0, i);
+            let repeated = "";
+            for (let j = 0; j < n / i; j++) {
+                repeated += substring;
+            }
+            if (repeated === s) return true;
         }
-        test = s
     }
-    return false
+    return false;
 };
