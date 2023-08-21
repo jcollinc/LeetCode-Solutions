@@ -3,15 +3,14 @@
  * @return {boolean}
  */
 var repeatedSubstringPattern = function(s) {
-    let left = 0, right = 1
-    while (right < s.length) {
-        let candidate = s.slice(left,right), idx = 0, len = right - left
-        while (candidate === s.slice(idx, idx + len)) {
-            idx += len
-            if (idx >= s.length) return true
+    let test = s
+    for (let end = 1; end <= s.length / 2; end++) {
+        let candidate = test.slice(0, end)
+        while (candidate === test.slice(test.length-end)) {
+            test = test.slice(0, test.length-end)
+            if (test.length <= 0) return true
         }
-        right++
-        len++
+        test = s
     }
     return false
 };
