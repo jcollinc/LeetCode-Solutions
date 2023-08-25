@@ -5,27 +5,34 @@
  * @return {boolean}
  */
 var isInterleave = function(s1, s2, s3) {
-    let canCreateS3 = false
-    if (s1.length + s2.length > s3.length || testCaseIs106(s1,s2,s3)) return canCreateS3
-    function tryCreateS3 (word1, word2, concat) {
-        if ((!concat && !word1 && !word2) || canCreateS3) {
-            canCreateS3 = true
-            return
-        }
-        if (word1[0] !== concat[0] && word2[0] !== concat[0]) {
-            return
-        }
-        if (word1 && word1[0] === concat[0]) tryCreateS3(word1.slice(1), word2, concat.slice(1))
-        if (word2 && word2[0] === concat[0]) tryCreateS3(word1, word2.slice(1), concat.slice(1))
+    if (s1.length + s2.length !== s3.length) {
+        return false;
     }
-    tryCreateS3(s1, s2, s3) 
-    return canCreateS3
-};
 
-testCaseIs106 = (s1,s2,s3) => {
-    return (
-        s1 === "abababababababababababababababababababababababababababababababababababababababababababababababababbb"
-        && s2 === "babababababababababababababababababababababababababababababababababababababababababababababababaaaba"
-        && s3 === "abababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababbb"
-    )
-}
+    const memo = new Map();
+
+    function tryCreateS3(i, j, k) {
+        if (k === s3.length) {
+            return true;
+        }
+
+        if (memo.has(`${i}-${j}`)) {
+            return memo.get(`${i}-${j}`);
+        }
+
+        let canCreate = false;
+
+        if (i < s1.length && s1[i] === s3[k]) {
+            canCreate = tryCreateS3(i + 1, j, k + 1);
+        }
+
+        if (!canCreate && j < s2.length && s2[j] === s3[k]) {
+            canCreate = tryCreateS3(i, j + 1, k + 1);
+        }
+
+        memo.set(`${i}-${j}`, canCreate);
+        return canCreate;
+    }
+
+    return tryCreateS3(0, 0, 0);
+};
