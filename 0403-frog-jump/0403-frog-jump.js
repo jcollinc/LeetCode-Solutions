@@ -3,17 +3,19 @@
  * @return {boolean}
  */
 var canCross = function(stones) {
-    const n = stones.length;
-    const dp = new Array(n).fill(0).map(() => new Set());
-    dp[0].add(0);
-    
-    for (let i = 0; i < n; i++) {
+    let n = stones.length;
+    let dp = new Array(n).fill(false).map(() => new Array(n).fill(false));
+    dp[0][0] = true; 
+    for (let i = 1; i < n; i++) {
         for (let j = i - 1; j >= 0; j--) {
-            const distance = stones[i] - stones[j];
-            if (dp[j].has(distance - 1) || dp[j].has(distance) || dp[j].has(distance + 1)) {
-                dp[i].add(distance);
+            let step = stones[i] - stones[j];
+            if (step <= j + 1) {
+                dp[i][step] = dp[j][step - 1] || dp[j][step] || dp[j][step + 1];
+                if (i === n - 1 && dp[i][step]) {
+                    return true; 
+                }
             }
         }
     }
-    return !!dp[n - 1].size; 
+    return false;
 };
