@@ -15,5 +15,5 @@ var canCross = function(stones) {
             }
         }
     }
-    return dp[n - 1].size > 0; 
+    return !!dp[n - 1].size; 
 };
