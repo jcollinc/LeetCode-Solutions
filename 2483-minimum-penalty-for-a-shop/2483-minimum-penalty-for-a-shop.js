@@ -3,15 +3,17 @@
  * @return {number}
  */
 var bestClosingTime = function(customers) {
-    let dp = new Array(customers.length + 1)
-    dp[0] = customers.split("").filter((char) => char === 'Y').length
-    let min = dp[0], output = 0
-    for (let i = 1; i < dp.length; i++) {
-        dp[i] = dp[i-1] + (customers[i-1] === "Y" ? -1 : 1) 
-        if (dp[i] < min) {
-            min = dp[i]
-            output = i
+    let min = 0, res = 0
+    for (let char of customers) {
+        if (char === "Y") min++
+    }
+    let curr = min
+    for (let i = 1; i <= customers.length; i++) {
+        customers[i-1] === "Y" ? curr-- : curr++
+        if (curr < min) {
+            min = curr
+            res = i
         }
     }
-    return output
+    return res
 };
