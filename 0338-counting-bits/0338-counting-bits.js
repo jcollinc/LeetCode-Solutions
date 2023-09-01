@@ -3,10 +3,9 @@
  * @return {number[]}
  */
 var countBits = function(n) {
-    let count = 0, res = []
-    while (count <= n) {
-        res.push(count.toString(2).split("").filter(char => char === '1').length)
-        count++
+    const res = new Array(n + 1).fill(0);
+    for (let i = 1; i <= n; i++) {
+        res[i] = res[i >> 1] + (i & 1);
     }
-    return res
+    return res;
 };
