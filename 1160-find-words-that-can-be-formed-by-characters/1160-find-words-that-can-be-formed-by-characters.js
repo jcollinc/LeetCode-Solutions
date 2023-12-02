@@ -10,12 +10,13 @@ var countCharacters = function(words, chars) {
         charMap.set(char, 1 + (charMap.get(char) || 0))
     }
     for (let word of words) {
-    let mapCopy = new Map(charMap)
-        for (let char = 0; char < word.length; char++) {
-            if (mapCopy.get(word[char]) > 0) {
-                mapCopy.set(word[char], mapCopy.get(word[char]) - 1)
+        let count = new Map(), filled = 0
+        for (let char of word) {
+            count.set(char, 1 + count.get(char) || 0)
+            if (charMap.has(char) && charMap.get(char) > count.get(char)) {
+                filled++
+                if (filled === word.length) res += word.length
             } else break
-            if (char === word.length-1) res += word.length, console.log(word)
         }
     }
     return res
