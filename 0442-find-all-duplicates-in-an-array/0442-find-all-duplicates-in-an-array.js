@@ -3,9 +3,14 @@
  * @return {number[]}
  */
 var findDuplicates = function(nums) {
-    let numSet = new Set(), res = []
-    for (let num of nums) {
-        numSet.has(num) ? res.push(num) : numSet.add(num)
+    const ans = [];
+    const n = nums.length;
+    for (let i = 0; i < n; i++) {
+        const x = Math.abs(nums[i]);
+        if (nums[x - 1] < 0) {
+            ans.push(x);
+        }
+        nums[x - 1] *= -1;
     }
-    return res
+    return ans;
 };
