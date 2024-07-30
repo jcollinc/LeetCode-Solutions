@@ -3,21 +3,14 @@
  * @return {number}
  */
 var minimumDeletions = function(s) {
-    let countA = [], countB = []
-    let count = 0
-    for (let i = 0; i < s.length; i++) {
-        countB[i] = count
-        if (s[i] == 'b') count++
+    let deletions = 0, counts = 0;
+    for (let char of s) {
+        if (char === 'b') {
+            counts += 1;
+        } else if (counts > 0) {
+            deletions += 1;
+            counts -= 1;
+        }
     }
-    count = 0
-    for (let i = s.length-1; i >= 0; i--) {
-        countA[i] = count
-        if (s[i] == 'a') count++
-    }
-    let min = Infinity
-    console.log(countA, countB)
-    for (let i = 0; i < s.length; i++) {
-        min = Math.min(min, countA[i] + countB[i])    
-    }
-    return min
+    return deletions;
 };
